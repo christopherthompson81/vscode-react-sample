@@ -7,14 +7,18 @@ var APP_ROOT = 'app';
 var entries = [
      './' + APP_ROOT + '/client',
 	 'webpack-dev-server/client?http://localhost:8080',
-	 'webpack/hot/dev-server'
 ];
 
 var loaders = [
     {
         test: /\.scss$/,
-        loader: 'style!css?modules!sass',
-        include: path.join(__dirname, APP_ROOT)
+        use: [{
+            loader: "style-loader" // creates style nodes from JS strings
+        }, {
+            loader: "css-loader" // translates CSS into CommonJS
+        }, {
+            loader: "sass-loader" // compiles Sass to CSS
+        }]
     },
     {
         test: /\.js$/,
